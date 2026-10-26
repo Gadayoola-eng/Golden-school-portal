@@ -1,0 +1,96 @@
+// Prisma schema for Student Portal
+// Supports PostgreSQL as requested
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  TEACHER
+  STUDENT
+}
+
+model User {
+  id            String       @id @default(uuid())
+  name          String
+  email         String       @unique
+  password      String
+  role          Role         @default(STUDENT)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  // Teacher relationships
+  classesTaught Class[]      @relation("TeacherClasses")
+
+  // Student relationships
+  enrollments   Enrollment[]
+  submissions   Submission[]
+
+  @@map("users")
+}
+
+model Class {
+  id          String       @id @default(uuid())
+  name        String
+  description String?
+  teacherId   String
+  teacher     User         @relation("TeacherClasses", fields: [teacherId], references: [id], onDelete: Cascade)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  enrollments Enrollment[]
+  assignments Assignment[]
+
+  @@map("classes")
+}
+
+model Enrollment {
+  id         String   @id @default(uuid())
+  studentId  String
+  classId    String
+  student    User     @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  class      Class    @relation(fields: [classId], references: [id], onDelete: Cascade)
+  enrolledAt DateTime @default(now())
+
+  @@unique([studentId, classId])
+  @@map("enrollments")
+}
+
+model Assignment {
+  id           String       @id @default(uuid())
+  classId      String
+  class        Class        @relation(fields: [classId], references: [id], onDelete: Cascade)
+  title        String
+  instructions String
+  dueDate      DateTime
+  points       Int          @default(100)
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  submissions  Submission[]
+
+  @@map("assignments")
+}
+
+model Submission {
+  id           String     @id @default(uuid())
+  assignmentId String
+  assignment   Assignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
+  studentId    String
+  student      User       @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  textAnswer   String?
+  fileUrl      String?
+  fileName     String?
+  submittedAt  DateTime   @default(now())
+  grade        Float?
+  feedback     String?
+  gradedAt     DateTime?
+
+  @@unique([assignmentId, studentId])
+  @@map("submissions")
+}

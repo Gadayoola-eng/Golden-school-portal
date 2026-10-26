@@ -1,0 +1,47 @@
+# Dependencies
+node_modules/
+*/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Production build outputs
+dist/
+client/dist/
+build/
+
+# Environment and secrets (keep .env.example)
+.env
+.env.*
+!.env.example
+!server/.env.example
+server/.env
+
+# Uploaded files (keep .gitkeep)
+server/uploads/*
+!server/uploads/.gitkeep
+
+# Cache & temporary files
+.vite/
+client/.vite/
+.cache/
+server/.cache/
+coverage/
+.nyc_output/
+
+# IDE & Editor files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.gemini/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini

@@ -1,0 +1,16 @@
+{
+  "name": "student-portal-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Full-stack Student Portal with Teacher and Student roles",
+  "scripts": {
+    "server": "npm run dev --prefix server",
+    "client": "npm run dev --prefix client",
+    "dev": "concurrently -n 'SERVER,CLIENT' -c 'blue,green' \"npm run server\" \"npm run client\"",
+    "install:all": "npm install && npm install --prefix server && npm install --prefix client",
+    "build": "npm run build --prefix client"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.5"
+  }
+}

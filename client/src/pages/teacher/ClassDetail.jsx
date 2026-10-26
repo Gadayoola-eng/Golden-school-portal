@@ -380,7 +380,7 @@ export default function ClassDetail() {
               type="email"
               value={studentEmail}
               onChange={(e) => setStudentEmail(e.target.value)}
-              placeholder="e.g. student@portal.edu or elena@portal.edu"
+              placeholder="e.g. pupil@goldenschool.edu"
               className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
               required
             />

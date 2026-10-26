@@ -139,8 +139,8 @@ export default function ApplyPage() {
   // ----------------------------------------------------------------
   // TAB 2: APPLICATION TRACKER STATE
   // ----------------------------------------------------------------
-  const [searchCode, setSearchCode] = useState('GIS-ADM-2026-7841');
-  const [activeSearch, setActiveSearch] = useState('GIS-ADM-2026-7841');
+  const [searchCode, setSearchCode] = useState('');
+  const [activeSearch, setActiveSearch] = useState('');
 
   const { data: trackData, isLoading: isTracking, error: trackError } = useQuery({
     queryKey: ['trackApp', activeSearch],
@@ -835,7 +835,7 @@ export default function ApplyPage() {
                 Track Application & Entrance Exam Status
               </h2>
               <p className="text-sm text-slate-500 mt-1">
-                Enter your reference code (e.g. <button onClick={() => { setSearchCode('GIS-ADM-2026-7841'); setActiveSearch('GIS-ADM-2026-7841'); }} className="text-brand-600 underline font-semibold">GIS-ADM-2026-7841</button> or <button onClick={() => { setSearchCode('GIS-ADM-2026-8920'); setActiveSearch('GIS-ADM-2026-8920'); }} className="text-brand-600 underline font-semibold">GIS-ADM-2026-8920</button>) to view live screening milestones.
+                Enter your application reference code to view live screening milestones.
               </p>
             </div>
 
@@ -847,7 +847,7 @@ export default function ApplyPage() {
                   type="text"
                   value={searchCode}
                   onChange={(e) => setSearchCode(e.target.value)}
-                  placeholder="Enter reference number (e.g. GIS-ADM-2026-7841)"
+                  placeholder="Enter application reference number"
                   className="w-full pl-12 pr-4 py-3.5 rounded-2xl border border-slate-300 font-mono text-sm focus:ring-2 focus:ring-amber-500 focus:outline-hidden"
                 />
               </div>
@@ -870,7 +870,7 @@ export default function ApplyPage() {
                 <AlertCircle className="w-8 h-8 text-rose-500 mx-auto mb-2" />
                 <h3 className="font-bold text-base">Application Not Found</h3>
                 <p className="text-xs text-rose-600 mt-1 max-w-md mx-auto">
-                  {trackError.response?.data?.error || 'We could not find an application with that reference number. Try demo code GIS-ADM-2026-7841.'}
+                  {trackError.response?.data?.error || 'We could not find an application with that reference number. Please check the code provided on your application slip.'}
                 </p>
               </div>
             ) : trackedApp ? (

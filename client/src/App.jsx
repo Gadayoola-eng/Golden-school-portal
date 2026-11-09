@@ -93,7 +93,6 @@ export default function App() {
           {/* Public Admissions & Acquisition Routes (Phase 2) */}
           <Route path="/apply" element={<ApplyPage />} />
           <Route path="/admissions" element={<ApplyPage />} />
-          <Route path="/visit" element={<ApplyPage />} />
           <Route path="/track" element={<ApplyPage />} />
 
           {/* Careers & Employment Opportunities (Phase 4) */}

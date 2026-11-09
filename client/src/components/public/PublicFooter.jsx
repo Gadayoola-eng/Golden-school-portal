@@ -80,11 +80,6 @@ export default function PublicFooter() {
                 </Link>
               </li>
               <li>
-                <Link to="/apply#visit" className="text-slate-400 hover:text-white transition-colors">
-                  Book a Campus Tour
-                </Link>
-              </li>
-              <li>
                 <Link to="/news" className="text-slate-400 hover:text-white transition-colors">
                   School News & Events
                 </Link>

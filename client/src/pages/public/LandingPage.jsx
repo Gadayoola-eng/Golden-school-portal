@@ -177,17 +177,16 @@ export default function LandingPage() {
               <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
-              to="/apply#visit"
+              to="/apply#status"
               className="flex items-center gap-2 px-6 py-3.5 rounded-2xl text-xs sm:text-sm font-bold bg-white/10 hover:bg-white/20 text-white border border-white/15 backdrop-blur-sm transition-colors"
             >
-              <Calendar className="w-4 h-4 text-amber-400" />
-              <span>Book a Campus Tour</span>
+              <span>Track Application Status →</span>
             </Link>
             <Link
-              to="/apply#status"
+              to="/downloads"
               className="flex items-center gap-2 px-5 py-3.5 rounded-2xl text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition-colors"
             >
-              Track Application Status →
+              Download Prospectus (PDF)
             </Link>
           </div>
 
@@ -338,7 +337,61 @@ export default function LandingPage() {
 
           {/* Two-Column Leadership Showcase */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-            {/* 1. PROPRIETRESS CARD */}
+            {/* 1. FOUNDER & ADMINISTRATIVE HEAD CARD */}
+            <div className="bg-slate-900/90 rounded-3xl p-6 sm:p-8 border border-amber-500/30 shadow-2xl relative flex flex-col justify-between backdrop-blur-md hover:border-amber-500/60 transition-all">
+              <div>
+                <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-6">
+                  <div className="relative shrink-0">
+                    <img
+                      src="/head_of_school.jpg"
+                      alt="Pastor Ogunleye S.A - Founder & Administrative Head"
+                      className="w-32 h-44 sm:w-36 sm:h-48 rounded-2xl object-cover shadow-2xl border-2 border-amber-400/80"
+                    />
+                    <div className="absolute -bottom-2 -right-2 bg-amber-500 text-slate-950 p-1.5 rounded-xl shadow-md">
+                      <Award className="w-4 h-4" />
+                    </div>
+                  </div>
+                  <div className="text-center sm:text-left">
+                    <span className="inline-block px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-amber-500/20 text-amber-300 border border-amber-500/40 mb-2">
+                      Founder & Administrative Head
+                    </span>
+                    <h3 className="text-2xl font-black text-white tracking-tight">
+                      Pastor Ogunleye S.A
+                    </h3>
+                    <p className="text-xs font-bold text-amber-400 mt-0.5">
+                      Founder & Administrative Head
+                    </p>
+                    <p className="text-[11px] font-semibold text-slate-400 mt-2 flex items-center justify-center sm:justify-start gap-1">
+                      <Building className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                      Academic Affairs & Administration
+                    </p>
+                  </div>
+                </div>
+
+                <div className="space-y-3 text-slate-300 text-xs sm:text-sm leading-relaxed border-t border-slate-800 pt-4">
+                  <p className="italic text-amber-200/90 font-medium">
+                    "We don't merely prepare children to pass examinations; we build enduring foundations for life."
+                  </p>
+                  <p>
+                    "At Golden International School, our classroom atmosphere is joyful, orderly, and mentally stimulating. Through Jolly Phonics, mental numeracy drills, and holistic child development, we ensure every pupil graduates with exceptional confidence, discipline, and outstanding common entrance results."
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-6 pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs">
+                <a
+                  href="tel:08062392750"
+                  className="text-xs font-bold text-amber-400 hover:text-amber-300 flex items-center gap-1"
+                >
+                  Contact Founder & Administrative Head Desk →
+                </a>
+                <span className="text-emerald-400 font-bold text-[11px] bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/30">
+                  Admissions Open
+                </span>
+              </div>
+            </div>
+
+            {/* 2. PROPRIETRESS CARD */}
             <div className="bg-slate-900/90 rounded-3xl p-6 sm:p-8 border border-amber-500/30 shadow-2xl relative flex flex-col justify-between backdrop-blur-md hover:border-amber-500/60 transition-all">
               <div>
                 <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-6">
@@ -354,7 +407,7 @@ export default function LandingPage() {
                   </div>
                   <div className="text-center sm:text-left">
                     <span className="inline-block px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-amber-500/20 text-amber-300 border border-amber-500/40 mb-2">
-                      Proprietress & Founder
+                      Proprietress
                     </span>
                     <h3 className="text-2xl font-black text-white tracking-tight">
                       Mrs. Ogunleye E.A
@@ -382,60 +435,6 @@ export default function LandingPage() {
               <div className="mt-6 pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs">
                 <span className="text-slate-400 text-[11px]">School Motto:</span>
                 <span className="text-amber-400 font-bold">The Word: Psalm 119:105</span>
-              </div>
-            </div>
-
-            {/* 2. HEAD OF SCHOOL CARD */}
-            <div className="bg-slate-900/90 rounded-3xl p-6 sm:p-8 border border-amber-500/30 shadow-2xl relative flex flex-col justify-between backdrop-blur-md hover:border-amber-500/60 transition-all">
-              <div>
-                <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-6">
-                  <div className="relative shrink-0">
-                    <img
-                      src="/head_of_school.jpg"
-                      alt="Pastor Ogunleye S.A - Head of School"
-                      className="w-32 h-44 sm:w-36 sm:h-48 rounded-2xl object-cover shadow-2xl border-2 border-amber-400/80"
-                    />
-                    <div className="absolute -bottom-2 -right-2 bg-amber-500 text-slate-950 p-1.5 rounded-xl shadow-md">
-                      <Award className="w-4 h-4" />
-                    </div>
-                  </div>
-                  <div className="text-center sm:text-left">
-                    <span className="inline-block px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-amber-500/20 text-amber-300 border border-amber-500/40 mb-2">
-                      Head of School
-                    </span>
-                    <h3 className="text-2xl font-black text-white tracking-tight">
-                      Pastor Ogunleye S.A
-                    </h3>
-                    <p className="text-xs font-bold text-amber-400 mt-0.5">
-                      Head of School & Educational Director
-                    </p>
-                    <p className="text-[11px] font-semibold text-slate-400 mt-2 flex items-center justify-center sm:justify-start gap-1">
-                      <Building className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-                      Academic Affairs & Administration
-                    </p>
-                  </div>
-                </div>
-
-                <div className="space-y-3 text-slate-300 text-xs sm:text-sm leading-relaxed border-t border-slate-800 pt-4">
-                  <p className="italic text-amber-200/90 font-medium">
-                    "We don't merely prepare children to pass examinations; we build enduring foundations for life."
-                  </p>
-                  <p>
-                    "At Golden International School, our classroom atmosphere is joyful, orderly, and mentally stimulating. Through Jolly Phonics, mental numeracy drills, and holistic child development, we ensure every pupil graduates with exceptional confidence, discipline, and outstanding common entrance results."
-                  </p>
-                </div>
-              </div>
-
-              <div className="mt-6 pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs">
-                <Link
-                  to="/apply#visit"
-                  className="text-xs font-bold text-amber-400 hover:text-amber-300 flex items-center gap-1"
-                >
-                  Schedule an Appointment with Head of School →
-                </Link>
-                <span className="text-emerald-400 font-bold text-[11px] bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/30">
-                  Admissions Open
-                </span>
               </div>
             </div>
           </div>
@@ -691,7 +690,7 @@ export default function LandingPage() {
             Admissions for 2026/2027 Academic Session are Filling Fast
           </h2>
           <p className="text-sm text-slate-900 max-w-2xl mx-auto font-medium">
-            Take the first step today. Submit your application online in minutes, book a physical school tour, or download our prospectus.
+            Take the first step today. Submit your application online in minutes or download our prospectus.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3 pt-4">
             <Link

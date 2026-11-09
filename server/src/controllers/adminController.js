@@ -50,7 +50,7 @@ const getAdminOverview = async (req, res) => {
       { id: 'act-2', type: 'FINANCE', text: 'Tuition payment of ₦850,000 received for Alex Mercer (Invoice GIS-INV-2026-001).', time: '42 mins ago', icon: 'CreditCard' },
       { id: 'act-3', type: 'ATTENDANCE', text: 'Prof. Sarah Connor certified today\'s Roll Call register for CS101.', time: '1 hour ago', icon: 'CheckCircle2' },
       { id: 'act-4', type: 'CAREERS', text: 'New CV submitted by Dr. Chidi Okafor for Senior Physics Educator opening.', time: '2 hours ago', icon: 'Briefcase' },
-      { id: 'act-5', type: 'VISIT', text: 'Campus tour booked by Mrs. Funke Balogun for Monday, 20th April 2026.', time: '3 hours ago', icon: 'Calendar' },
+      { id: 'act-5', type: 'ENQUIRY', text: 'Admission inquiry received from Mrs. Funke Balogun.', time: '3 hours ago', icon: 'HelpCircle' },
     ];
 
     return res.json({

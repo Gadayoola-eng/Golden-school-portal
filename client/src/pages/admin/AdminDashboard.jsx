@@ -50,7 +50,7 @@ export default function AdminDashboard() {
   const toast = useToast();
   const queryClient = useQueryClient();
 
-  const [activeTab, setActiveTab] = useState('classes'); // 'classes' | 'admissions' | 'finance' | 'careers' | 'users' | 'visits' | 'website'
+  const [activeTab, setActiveTab] = useState('classes'); // 'classes' | 'admissions' | 'finance' | 'careers' | 'users' | 'website'
   const [admissionsFilter, setAdmissionsFilter] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedApp, setSelectedApp] = useState(null);
@@ -119,14 +119,6 @@ export default function AdminDashboard() {
     },
   });
 
-  // 6. Fetch Campus Visits
-  const { data: visitsData } = useQuery({
-    queryKey: ['adminVisits'],
-    queryFn: async () => {
-      const res = await api.get('/admissions/visits');
-      return res.data;
-    },
-  });
 
   // 7. Fetch All Classes in School (Admin overall view)
   const { data: classesData } = useQuery({
@@ -229,7 +221,6 @@ export default function AdminDashboard() {
     outstandingRevenue: 350000,
     attendanceRate: '98.5%',
     activeApplications: 3,
-    confirmedVisits: 2,
     jobApplicants: 2,
   };
 
@@ -238,7 +229,6 @@ export default function AdminDashboard() {
   const bills = billingData?.bills || [];
   const users = usersData?.users || [];
   const candidateApps = careersData?.applications || [];
-  const campusVisits = visitsData?.visits || [];
 
   const filteredApps = applications.filter((app) => {
     if (!searchQuery.trim()) return true;
@@ -500,7 +490,6 @@ export default function AdminDashboard() {
           { id: 'admissions', label: 'Admissions & Applications', icon: FileText, count: applications.length },
           { id: 'finance', label: 'Tuition & Invoicing', icon: CreditCard, count: bills.length },
           { id: 'careers', label: 'Faculty Recruitment (ATS)', icon: Briefcase, count: candidateApps.length },
-          { id: 'visits', label: 'Campus Tour Bookings', icon: Calendar, count: campusVisits.length },
           { id: 'website', label: 'Website CMS & Portal', icon: Globe, count: 5 },
           { id: 'users', label: 'Users & Roles Directory', icon: Users, count: users.length },
         ].map((tab) => {
@@ -923,69 +912,6 @@ export default function AdminDashboard() {
                         >
                           Shortlist Candidate
                         </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* ========================================================== */}
-      {/* TAB 4: CAMPUS TOUR BOOKINGS */}
-      {/* ========================================================== */}
-      {activeTab === 'visits' && (
-        <div className="space-y-6">
-          <div className="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-xs">
-            <div className="p-5 border-b border-slate-200 bg-slate-50">
-              <h3 className="text-sm font-bold text-slate-900">
-                Booked Parent Walkthroughs & Campus Tours
-              </h3>
-              <p className="text-xs text-slate-500 mt-0.5">
-                Assigned admissions ambassadors and prospective parent hospitality schedules.
-              </p>
-            </div>
-
-            <div className="overflow-x-auto">
-              <table className="w-full text-left border-collapse text-xs">
-                <thead>
-                  <tr className="border-b border-slate-200 text-slate-500 uppercase tracking-wider text-[11px] font-bold">
-                    <th className="py-3 px-4">Parent Name</th>
-                    <th className="py-3 px-3">Tour Date & Slot</th>
-                    <th className="py-3 px-3">Visitors</th>
-                    <th className="py-3 px-3">Interested Grade</th>
-                    <th className="py-3 px-4">Assigned Ambassador</th>
-                    <th className="py-3 px-3">Status</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-100">
-                  {campusVisits.map((v) => (
-                    <tr key={v.id} className="hover:bg-slate-50/80">
-                      <td className="py-3 px-4 font-bold text-slate-900">
-                        {v.parentName}
-                        <span className="block text-[10px] text-slate-400 font-normal">
-                          {v.parentEmail} • {v.parentPhone}
-                        </span>
-                      </td>
-                      <td className="py-3 px-3 font-semibold text-slate-900">
-                        {v.visitDate}
-                        <span className="block text-[10px] text-slate-500 font-normal">{v.timeSlot}</span>
-                      </td>
-                      <td className="py-3 px-3 text-slate-700">
-                        {v.attendeeCount} Attendees
-                      </td>
-                      <td className="py-3 px-3 font-medium text-slate-800">
-                        {v.interestedGrade}
-                      </td>
-                      <td className="py-3 px-4 text-brand-700 font-semibold">
-                        {v.tourGuide}
-                      </td>
-                      <td className="py-3 px-3">
-                        <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 uppercase">
-                          {v.status}
-                        </span>
                       </td>
                     </tr>
                   ))}

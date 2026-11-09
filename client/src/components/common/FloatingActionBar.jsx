@@ -36,9 +36,9 @@ const KNOWLEDGE_BASE = [
     cta: { text: "Download Fee Structure (PDF)", link: "/downloads" }
   },
   {
-    triggers: ['tour', 'visit', 'campus', 'location', 'where', 'address'],
-    answer: "We are located at Odo - Iro Street, Ido-Ekiti, Ekiti State. We offer guided parent tours of our crèche, nursery, and primary classrooms every Monday through Friday (10:00 AM & 02:00 PM).",
-    cta: { text: "Book a Campus Tour", link: "/apply#visit" }
+    triggers: ['location', 'where', 'address', 'directions', 'find'],
+    answer: "We are located at Odo - Iro Street, Ido-Ekiti, Ekiti State. Our administrative offices are open Monday through Friday from 08:00 AM to 04:00 PM.",
+    cta: { text: "Contact Us on WhatsApp", link: "https://wa.me/2349120771514" }
   },
   {
     triggers: ['report', 'result', 'grade', 'card', 'scores', 'ca'],
@@ -109,7 +109,7 @@ export default function FloatingActionBar() {
         : {
             id: Date.now() + 1,
             sender: 'bot',
-            text: "Thank you for asking! For detailed personalized inquiries, you can chat directly with our Admissions Desk on WhatsApp or schedule a campus tour.",
+            text: "Thank you for asking! For detailed personalized inquiries, you can chat directly with our Admissions Desk on WhatsApp or call our support lines.",
             cta: { text: "Chat on WhatsApp (09120771514)", link: "https://wa.me/2349120771514" },
             time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
           };
@@ -175,10 +175,10 @@ export default function FloatingActionBar() {
               💰 Fees
             </button>
             <button
-              onClick={() => handleSendMessage("Can I book a campus tour?")}
+              onClick={() => handleSendMessage("Where is the school located?")}
               className="px-2.5 py-1 rounded-full bg-white border border-slate-200 hover:border-amber-400 text-slate-700 whitespace-nowrap shrink-0 transition-colors"
             >
-              🏛️ School Tour
+              📍 Location
             </button>
           </div>
 

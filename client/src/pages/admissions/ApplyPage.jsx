@@ -58,16 +58,14 @@ export default function ApplyPage() {
   const toast = useToast();
   const queryClient = useQueryClient();
 
-  // Active Tab: 'apply' | 'status' | 'visit'
+  // Active Tab: 'apply' | 'status'
   const [activeTab, setActiveTab] = useState(() => {
     if (location.hash === '#status' || location.pathname.includes('/track')) return 'status';
-    if (location.hash === '#visit' || location.pathname.includes('/visit')) return 'visit';
     return 'apply';
   });
 
   useEffect(() => {
     if (location.hash === '#status') setActiveTab('status');
-    if (location.hash === '#visit') setActiveTab('visit');
     if (location.hash === '#apply') setActiveTab('apply');
   }, [location.hash]);
 
@@ -164,40 +162,6 @@ export default function ApplyPage() {
     setActiveSearch(searchCode.trim());
   };
 
-  // ----------------------------------------------------------------
-  // TAB 3: CAMPUS VISIT STATE
-  // ----------------------------------------------------------------
-  const [visitSubmitted, setVisitSubmitted] = useState(null);
-  const [visitForm, setVisitForm] = useState({
-    parentName: '',
-    parentEmail: '',
-    parentPhone: '',
-    attendeeCount: 2,
-    interestedGrade: GRADES[5],
-    visitDate: '2026-04-20',
-    timeSlot: TIME_SLOTS[0],
-    interests: ['Early Years Activity Room', 'Phonics & Literacy Hub', 'Little Einsteins STEAM Lab'],
-    specialRequests: '',
-  });
-
-  const visitMutation = useMutation({
-    mutationFn: async (payload) => {
-      const res = await api.post('/admissions/visit', payload);
-      return res.data;
-    },
-    onSuccess: (data) => {
-      setVisitSubmitted(data.visit);
-      toast.success('Campus tour successfully booked!');
-    },
-    onError: (err) => {
-      toast.error(err.response?.data?.error || 'Failed to schedule campus tour.');
-    },
-  });
-
-  const handleVisitSubmit = (e) => {
-    e.preventDefault();
-    visitMutation.mutate(visitForm);
-  };
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 pb-20">
@@ -250,7 +214,7 @@ export default function ApplyPage() {
             Begin Your Journey of <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-200">Excellence & Distinction</span>
           </h1>
           <p className="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto mb-8 font-normal leading-relaxed">
-            Apply online in minutes, check real-time admission screening status, or book a guided tour of our modern academic facilities.
+            Apply online in minutes or check real-time admission screening status.
           </p>
 
           {/* Tab Navigation Pill */}
@@ -276,17 +240,6 @@ export default function ApplyPage() {
             >
               <Search className="w-4 h-4" />
               Track Application Status
-            </button>
-            <button
-              onClick={() => setActiveTab('visit')}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 ${
-                activeTab === 'visit'
-                  ? 'bg-amber-500 text-slate-950 shadow-md shadow-amber-500/30'
-                  : 'text-slate-300 hover:text-white hover:bg-white/5'
-              }`}
-            >
-              <Calendar className="w-4 h-4" />
-              Book Campus Tour
             </button>
           </div>
         </div>
@@ -1043,182 +996,6 @@ export default function ApplyPage() {
                 </div>
               </div>
             ) : null}
-          </div>
-        )}
-
-        {/* ========================================================== */}
-        {/* TAB 3: BOOK CAMPUS TOUR / VISIT */}
-        {/* ========================================================== */}
-        {activeTab === 'visit' && (
-          <div className="bg-white rounded-3xl shadow-xl border border-slate-200/80 p-6 sm:p-10 space-y-8">
-            <div>
-              <span className="text-xs font-bold text-amber-600 uppercase tracking-wider block mb-1">
-                Experience Our World-Class Campus
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
-                Schedule a Personalized Campus Tour
-              </h2>
-              <p className="text-sm text-slate-500 mt-1">
-                We invite prospective families to tour our sensory Early Years nursery, bright primary classrooms, Little Einsteins STEAM robotics corner, children's splash pool, and fenced play arena.
-              </p>
-            </div>
-
-            {visitSubmitted ? (
-              <div className="text-center py-8">
-                <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto mb-4">
-                  <CheckCircle2 className="w-8 h-8" />
-                </div>
-                <h3 className="text-2xl font-extrabold text-slate-900 mb-2">
-                  Campus Visit Confirmed!
-                </h3>
-                <p className="text-sm text-slate-600 max-w-md mx-auto mb-6">
-                  Thank you, <strong>{visitSubmitted.parentName}</strong>. A dedicated student ambassador has been assigned to host your family.
-                </p>
-
-                {/* Tour Slip Card */}
-                <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6 max-w-lg mx-auto text-left mb-6 space-y-3 text-xs">
-                  <div className="flex justify-between border-b border-slate-200 pb-2">
-                    <span className="text-slate-500">Tour Date & Slot:</span>
-                    <span className="font-bold text-slate-900">{visitSubmitted.visitDate} • {visitSubmitted.timeSlot}</span>
-                  </div>
-                  <div className="flex justify-between border-b border-slate-200 pb-2">
-                    <span className="text-slate-500">Tour Guide Host:</span>
-                    <span className="font-bold text-brand-700">{visitSubmitted.tourGuide}</span>
-                  </div>
-                  <div className="flex justify-between border-b border-slate-200 pb-2">
-                    <span className="text-slate-500">Reception Meeting Point:</span>
-                    <span className="font-bold text-slate-900">{visitSubmitted.meetingPoint}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-500">Number of Attendees:</span>
-                    <span className="font-bold text-slate-900">{visitSubmitted.attendeeCount} Visitors</span>
-                  </div>
-                </div>
-
-                <button
-                  onClick={() => setVisitSubmitted(null)}
-                  className="px-6 py-2.5 rounded-xl text-xs font-bold bg-slate-900 text-white hover:bg-slate-800 transition-colors"
-                >
-                  Book Another Tour
-                </button>
-              </div>
-            ) : (
-              <form onSubmit={handleVisitSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-                      Parent / Guardian Full Name *
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={visitForm.parentName}
-                      onChange={(e) => setVisitForm({ ...visitForm, parentName: e.target.value })}
-                      placeholder="e.g. Mrs. Funke Balogun"
-                      className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500 focus:outline-hidden text-sm"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-                      Email Address *
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      value={visitForm.parentEmail}
-                      onChange={(e) => setVisitForm({ ...visitForm, parentEmail: e.target.value })}
-                      placeholder="funke.balogun@example.com"
-                      className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500 focus:outline-hidden text-sm"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-                      Phone Number *
-                    </label>
-                    <input
-                      type="tel"
-                      required
-                      value={visitForm.parentPhone}
-                      onChange={(e) => setVisitForm({ ...visitForm, parentPhone: e.target.value })}
-                      placeholder="+234 802 123 4567"
-                      className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500 focus:outline-hidden text-sm"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-                      Number of Attendees
-                    </label>
-                    <select
-                      value={visitForm.attendeeCount}
-                      onChange={(e) => setVisitForm({ ...visitForm, attendeeCount: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500 focus:outline-hidden text-sm bg-white"
-                    >
-                      <option value={1}>1 Person</option>
-                      <option value={2}>2 People (Parent + Child)</option>
-                      <option value={3}>3 People (Both Parents + Child)</option>
-                      <option value={4}>4+ People (Family Group)</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-                      Preferred Tour Date *
-                    </label>
-                    <input
-                      type="date"
-                      required
-                      value={visitForm.visitDate}
-                      onChange={(e) => setVisitForm({ ...visitForm, visitDate: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500 focus:outline-hidden text-sm"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-                      Preferred Session Slot *
-                    </label>
-                    <select
-                      value={visitForm.timeSlot}
-                      onChange={(e) => setVisitForm({ ...visitForm, timeSlot: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500 focus:outline-hidden text-sm bg-white font-semibold"
-                    >
-                      {TIME_SLOTS.map((t) => (
-                        <option key={t} value={t}>{t}</option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div className="md:col-span-2">
-                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-                      Grade / Level of Primary Interest
-                    </label>
-                    <select
-                      value={visitForm.interestedGrade}
-                      onChange={(e) => setVisitForm({ ...visitForm, interestedGrade: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500 focus:outline-hidden text-sm bg-white"
-                    >
-                      {GRADES.map((g) => (
-                        <option key={g} value={g}>{g}</option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-
-                <div className="pt-4 border-t border-slate-200 flex justify-end">
-                  <button
-                    type="submit"
-                    disabled={visitMutation.isPending}
-                    className="flex items-center gap-2 px-8 py-3.5 rounded-xl text-sm font-bold bg-amber-500 text-slate-950 hover:bg-amber-400 transition-colors shadow-md shadow-amber-500/20"
-                  >
-                    {visitMutation.isPending ? 'Confirming Tour...' : 'Book My Campus Tour'}
-                    <ChevronRight className="w-4 h-4" />
-                  </button>
-                </div>
-              </form>
-            )}
           </div>
         )}
       </main>

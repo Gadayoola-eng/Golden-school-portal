@@ -129,8 +129,8 @@ const getStudentReportCard = async (req, res) => {
         formTeacherRemark: 'Alex has shown remarkable diligence, exemplary manners, and brilliant academic curiosity throughout this term. He is a shining star in Primary 4 Gold!',
         formTeacherName: 'Mrs. Sarah Connor (Primary 4 Class Teacher)',
         principalRemark: 'A delightful and well-deserved academic achievement. Alex embodies the wholesome character and joyful brilliance of Golden International Primary School.',
-        principalName: 'Mrs. Omolayo Bakare',
-        principalTitle: 'Head of Primary School',
+        principalName: 'Pastor Ogunleye S.A',
+        principalTitle: 'Founder & Administrative Head',
       };
     }
 

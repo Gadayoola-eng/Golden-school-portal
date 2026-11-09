@@ -332,7 +332,7 @@ class MemoryDB {
     // Seed Primary School Weekly Timetable Schedule (Primary 4 Gold)
     this.timetables = [
       // Monday
-      { id: 'tt-1', day: 'Monday', period: 1, time: '08:00 - 08:30', subject: 'Morning Circle, Assembly & Hymns', code: 'ASSEMBLY', room: 'Main Primary Hall', teacher: 'Mrs. O. Bakare', color: 'amber' },
+      { id: 'tt-1', day: 'Monday', period: 1, time: '08:00 - 08:30', subject: 'Morning Circle, Assembly & Hymns', code: 'ASSEMBLY', room: 'Main Primary Hall', teacher: 'Pastor Ogunleye S.A', color: 'amber' },
       { id: 'tt-2', day: 'Monday', period: 2, time: '08:30 - 09:30', subject: 'Primary Mathematics & Mental Arithmetic', code: 'MTH401', room: 'Primary 4 Gold Suite', teacher: 'Mrs. Sarah Connor', color: 'blue', classId: classId },
       { id: 'tt-3', day: 'Monday', period: 3, time: '09:30 - 10:30', subject: 'Jolly Phonics, Diction & Reading Fluency', code: 'ENG401', room: 'Primary 4 Gold Suite', teacher: 'Mrs. Sarah Connor', color: 'indigo', classId: class2Id },
       { id: 'tt-4', day: 'Monday', period: 4, time: '11:00 - 12:00', subject: 'Basic Science & Nature Study', code: 'SCI401', room: 'Discovery Lab', teacher: 'Mr. D. Ojo', color: 'emerald' },
@@ -362,13 +362,13 @@ class MemoryDB {
       { id: 'tt-22', day: 'Thursday', period: 1, time: '08:00 - 08:30', subject: 'Handwriting & Cursive Penmanship Practice', code: 'PEN', room: 'Primary 4 Gold Suite', teacher: 'Mrs. Sarah Connor', color: 'amber' },
       { id: 'tt-23', day: 'Thursday', period: 2, time: '08:30 - 09:30', subject: 'Word Problems & Quantitative Reasoning', code: 'MTH401', room: 'Primary 4 Gold Suite', teacher: 'Mrs. Sarah Connor', color: 'blue', classId: classId },
       { id: 'tt-24', day: 'Thursday', period: 3, time: '09:30 - 10:30', subject: 'Reading Comprehension & Verbal Aptitude', code: 'ENG401', room: 'Primary 4 Gold Suite', teacher: 'Mrs. Sarah Connor', color: 'indigo', classId: class2Id },
-      { id: 'tt-25', day: 'Thursday', period: 4, time: '11:00 - 12:00', subject: 'Agricultural Science & School Farm Tour', code: 'AGR401', room: 'Primary Garden Farm', teacher: 'Mr. D. Ojo', color: 'lime' },
+      { id: 'tt-25', day: 'Thursday', period: 4, time: '11:00 - 12:00', subject: 'Agricultural Science & School Farm Practicals', code: 'AGR401', room: 'Primary Garden Farm', teacher: 'Mr. D. Ojo', color: 'lime' },
       { id: 'tt-26', day: 'Thursday', period: 5, time: '12:00 - 13:00', subject: 'Computer Literacy: Typing & Paint Studio', code: 'ICT401', room: 'Primary Media Suite', teacher: 'Mrs. Sarah Connor', color: 'blue' },
       { id: 'tt-27', day: 'Thursday', period: 6, time: '13:45 - 14:30', subject: 'Swimming Lessons & Water Safety', code: 'SWIM', room: 'Children’s Splash Pool', teacher: 'Coach T. Adeleke', color: 'cyan' },
       { id: 'tt-28', day: 'Thursday', period: 7, time: '14:30 - 15:15', subject: 'Junior Drama, Role-Play & Speech', code: 'DRAMA', room: 'Little Theatre', teacher: 'Ms. A. Bello', color: 'fuchsia' },
 
       // Friday
-      { id: 'tt-29', day: 'Friday', period: 1, time: '08:00 - 08:30', subject: 'Whole-Primary Praise & Star of the Week', code: 'PRAISE', room: 'Main Primary Hall', teacher: 'Mrs. O. Bakare', color: 'amber' },
+      { id: 'tt-29', day: 'Friday', period: 1, time: '08:00 - 08:30', subject: 'Whole-Primary Praise & Star of the Week', code: 'PRAISE', room: 'Main Primary Hall', teacher: 'Pastor Ogunleye S.A', color: 'amber' },
       { id: 'tt-30', day: 'Friday', period: 2, time: '08:30 - 09:30', subject: 'Fun Maths Quiz & Brain Puzzles', code: 'MTH401', room: 'Primary 4 Gold Suite', teacher: 'Mrs. Sarah Connor', color: 'blue', classId: classId },
       { id: 'tt-31', day: 'Friday', period: 3, time: '09:30 - 10:30', subject: 'Show and Tell / Public Speaking', code: 'SPEECH', room: 'Primary 4 Gold Suite', teacher: 'Mrs. Sarah Connor', color: 'indigo' },
       { id: 'tt-32', day: 'Friday', period: 4, time: '11:00 - 12:00', subject: 'Junior Orchestra & Traditional Drums', code: 'MUS401', room: 'Music Haven', teacher: 'Mr. P. Balogun', color: 'pink' },
@@ -525,7 +525,7 @@ class MemoryDB {
         formTeacherName: 'Mrs. Sarah Connor (Primary 4 Class Teacher)',
         principalRemark: 'A delightful and well-deserved academic achievement. Alex embodies the wholesome character and joyful brilliance of Golden International School, Ido-Ekiti.',
         principalName: 'Pastor Ogunleye S.A',
-        principalTitle: 'Head of School',
+        principalTitle: 'Founder & Administrative Head',
       }
     ];
 
@@ -604,38 +604,7 @@ class MemoryDB {
     ];
 
     // Seed Campus Visits (Primary School)
-    this.campusVisits = [
-      {
-        id: 'visit-101',
-        parentName: 'Mrs. Funke Balogun',
-        parentEmail: 'funke.balogun@example.com',
-        parentPhone: '+234 802 123 4567',
-        attendeeCount: 2,
-        interestedGrade: 'Primary 2 (Basic 2)',
-        visitDate: '2026-04-20',
-        timeSlot: 'Morning (10:00 AM - 11:30 AM)',
-        interests: ['Montessori Early Years Suite', 'Children’s Splash Pool', 'Primary Classrooms'],
-        status: 'CONFIRMED',
-        tourGuide: 'Mrs. Grace Adeleke (Primary Admissions Guide)',
-        meetingPoint: 'GIPS Welcome Pavilion & Reception Lounge',
-        createdAt: '2026-03-20T08:30:00Z',
-      },
-      {
-        id: 'visit-102',
-        parentName: 'Engr. Kenneth Obi',
-        parentEmail: 'kenneth.obi@example.com',
-        parentPhone: '+234 811 765 4321',
-        attendeeCount: 3,
-        interestedGrade: 'Nursery 2 (Age 4)',
-        visitDate: '2026-04-22',
-        timeSlot: 'Afternoon (02:00 PM - 03:30 PM)',
-        interests: ['Playground & Sensory Garden', 'Children’s Dining Hall', 'Jolly Phonics Corner'],
-        status: 'CONFIRMED',
-        tourGuide: 'Mr. Jude Obi (Admissions Ambassador)',
-        meetingPoint: 'GIPS Welcome Pavilion & Reception Lounge',
-        createdAt: '2026-03-22T11:45:00Z',
-      }
-    ];
+    this.campusVisits = [];
 
     // Seed Announcement Ticker Items (Primary School)
     this.announcements = [

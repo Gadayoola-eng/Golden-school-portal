@@ -157,10 +157,10 @@ export default function Login() {
                   Track Status
                 </Link>
                 <Link
-                  to="/apply#visit"
+                  to="/downloads"
                   className="px-3 py-1.5 rounded-lg bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 font-bold text-[11px] transition-colors"
                 >
-                  Book Tour
+                  Prospectus
                 </Link>
               </div>
             </div>

@@ -93,6 +93,7 @@ const login = async (req, res) => {
 
     const { email, password } = parseResult.data;
     const normalizedEmail = email.toLowerCase().trim();
+    const expectedRole = req.body.expectedRole;
 
     const user = await db.user.findUnique({
       where: { email: normalizedEmail },
@@ -100,6 +101,25 @@ const login = async (req, res) => {
 
     if (!user) {
       return res.status(401).json({ error: 'Invalid email or password.' });
+    }
+
+    // Pupils do not have portal logins; access is managed exclusively by Parents & Guardians
+    if (user.role === 'STUDENT') {
+      return res.status(403).json({
+        error: 'Direct pupil portal login is disabled. Terminal report cards, attendance, and fee invoices are managed exclusively by Parents and Guardians through the Parent Portal.',
+      });
+    }
+
+    // If an expected role is specified on a dedicated login page, ensure the user belongs to that role
+    if (expectedRole && user.role !== expectedRole && user.role !== 'ADMIN') {
+      const portalNames = {
+        PARENT: 'Parent & Guardian Portal',
+        TEACHER: 'Teacher & Faculty Portal',
+        ADMIN: 'Administrative Office',
+      };
+      return res.status(403).json({
+        error: `This account is registered as a ${user.role}. Please log in via the ${portalNames[user.role] || user.role + ' Portal'}.`,
+      });
     }
 
     const isMatch = await comparePassword(password, user.password);

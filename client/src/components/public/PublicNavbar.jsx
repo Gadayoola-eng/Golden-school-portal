@@ -16,6 +16,7 @@ import {
   Download,
   Newspaper,
   User,
+  Users,
   ExternalLink,
   ChevronRight,
   LogIn
@@ -54,6 +55,7 @@ export default function PublicNavbar() {
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'Admissions', path: '/apply' },
+    { name: 'Parent Login Portal', path: '/login/parent', highlight: true },
     { name: 'News & Events', path: '/news' },
     { name: 'Download Centre', path: '/downloads' },
     { name: 'Careers', path: '/careers' },
@@ -120,6 +122,18 @@ export default function PublicNavbar() {
           <div className="hidden md:flex items-center gap-1 lg:gap-2">
             {navLinks.map((link) => {
               const isActive = location.pathname === link.path;
+              if (link.highlight) {
+                return (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    className="px-3 py-1.5 rounded-xl text-xs lg:text-sm font-black bg-amber-100 text-amber-950 hover:bg-amber-200 border border-amber-300 flex items-center gap-1.5 shadow-xs transition-all"
+                  >
+                    <Users className="w-3.5 h-3.5 text-amber-700" />
+                    <span>{link.name}</span>
+                  </Link>
+                );
+              }
               return (
                 <Link
                   key={link.path}
@@ -137,33 +151,34 @@ export default function PublicNavbar() {
           </div>
 
           {/* Action CTAs */}
-          <div className="hidden md:flex items-center gap-3">
-            {isAuthenticated ? (
-              <Link
-                to={user?.role === 'ADMIN' ? '/admin' : user?.role === 'TEACHER' ? '/teacher' : user?.role === 'PARENT' ? '/parent' : '/student'}
-                className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-slate-900 hover:bg-slate-800 text-white transition-colors shadow-sm ring-1 ring-amber-500/40"
-              >
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span>Enter Portal ({user?.name?.split(' ')[0]})</span>
-                <ArrowRight className="w-3.5 h-3.5 text-amber-400" />
-              </Link>
-            ) : (
-              <Link
-                to="/login"
-                className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-800 transition-colors border border-slate-200 shadow-2xs"
-              >
-                <LogIn className="w-3.5 h-3.5 text-amber-600" />
-                <span>Portal Login</span>
-              </Link>
-            )}
+          <div className="hidden md:flex items-center gap-2.5">
+            <Link
+              to="/login/teacher"
+              className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold text-slate-700 hover:text-indigo-600 hover:bg-slate-100 transition-colors"
+            >
+              <GraduationCap className="w-3.5 h-3.5 text-indigo-600" />
+              <span>Staff Login</span>
+            </Link>
 
+            {/* Admission Button */}
             <Link
               to="/apply"
-              className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-extrabold bg-amber-500 hover:bg-amber-400 text-slate-950 transition-all shadow-md shadow-amber-500/20"
+              className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-bold bg-slate-900 hover:bg-slate-800 text-white transition-all shadow-xs"
             >
               <span>Apply Online</span>
-              <ArrowRight className="w-3.5 h-3.5" />
+              <ArrowRight className="w-3.5 h-3.5 text-amber-400" />
             </Link>
+
+            {isAuthenticated && (
+              <Link
+                to={user?.role === 'ADMIN' ? '/admin' : user?.role === 'TEACHER' ? '/teacher' : '/parent'}
+                className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-800 transition-colors"
+                title="Go to authenticated dashboard"
+              >
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span>Dashboard</span>
+              </Link>
+            )}
           </div>
 
           {/* Mobile Hamburger Toggle */}
@@ -190,20 +205,22 @@ export default function PublicNavbar() {
               </Link>
             ))}
             <div className="pt-4 border-t border-slate-100 flex flex-col gap-2">
+              {/* Admission Button */}
               <Link
                 to="/apply"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full text-center py-3 rounded-xl text-xs font-bold bg-amber-500 text-slate-950 shadow-sm"
+                className="w-full text-center py-3 rounded-xl text-xs font-bold bg-slate-900 text-white shadow-sm flex items-center justify-center gap-1.5"
               >
-                Apply for 2026/2027 Admission
+                <span>Apply for 2026/2027 Admission</span>
+                <ArrowRight className="w-3.5 h-3.5 text-amber-400" />
               </Link>
               <Link
-                to={isAuthenticated ? (user?.role === 'ADMIN' ? '/admin' : user?.role === 'TEACHER' ? '/teacher' : user?.role === 'PARENT' ? '/parent' : '/student') : '/login'}
+                to="/login/teacher"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full text-center py-2.5 rounded-xl text-xs font-bold bg-slate-900 text-white flex items-center justify-center gap-2 shadow-xs"
+                className="w-full text-center py-2.5 rounded-xl text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-800 flex items-center justify-center gap-2"
               >
-                <LogIn className="w-3.5 h-3.5 text-amber-400" />
-                {isAuthenticated ? 'Enter Portal Dashboard' : 'Sign In to Student & Staff Portal'}
+                <GraduationCap className="w-3.5 h-3.5 text-indigo-600" />
+                <span>Staff / Teacher Portal</span>
               </Link>
             </div>
           </div>

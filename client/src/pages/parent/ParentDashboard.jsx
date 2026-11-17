@@ -48,7 +48,7 @@ export default function ParentDashboard() {
     );
   }
 
-  const { student, courses, recentGrades, finances, announcements } = data;
+  const { student, courses, recentGrades, finances, announcements, children: wards } = data;
 
   const quickActions = [
     {

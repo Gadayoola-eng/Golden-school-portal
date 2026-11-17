@@ -104,18 +104,19 @@ export default function PublicFooter() {
             </h4>
             <ul className="space-y-2 text-xs">
               <li>
-                <Link to="/login" className="text-slate-400 hover:text-white transition-colors">
-                  Student Portal Access
+                <Link to="/login/parent" className="text-amber-400 font-semibold hover:text-amber-300 transition-colors flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                  Parent Portal (Result Checker)
                 </Link>
               </li>
               <li>
-                <Link to="/login" className="text-slate-400 hover:text-white transition-colors">
-                  Parent Portal & Fees
+                <Link to="/login/teacher" className="text-slate-400 hover:text-white transition-colors">
+                  Teacher & Staff Portal
                 </Link>
               </li>
               <li>
-                <Link to="/login" className="text-slate-400 hover:text-white transition-colors">
-                  Faculty & Staff Intranet
+                <Link to="/login/admin" className="text-slate-400 hover:text-white transition-colors">
+                  Administrative Management Gateway
                 </Link>
               </li>
               <li>
@@ -177,8 +178,16 @@ export default function PublicFooter() {
             <span className="hover:text-slate-400 cursor-pointer">Privacy Policy</span>
             <span className="hover:text-slate-400 cursor-pointer">Terms of Service</span>
             <span className="hover:text-slate-400 cursor-pointer">Cookie Settings</span>
-            <Link to="/login" className="text-amber-500 hover:text-amber-400 font-bold">
-              Staff & Student Sign In
+            <Link to="/login/parent" className="text-amber-500 hover:text-amber-400 font-bold">
+              Parent Portal
+            </Link>
+            <span className="text-slate-700">•</span>
+            <Link to="/login/teacher" className="text-slate-400 hover:text-white font-semibold">
+              Staff Login
+            </Link>
+            <span className="text-slate-700">•</span>
+            <Link to="/login/admin" className="text-slate-500 hover:text-slate-300 font-medium">
+              Admin Gateway
             </Link>
           </div>
         </div>

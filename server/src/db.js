@@ -44,7 +44,7 @@ class MemoryDB {
       updatedAt: new Date('2026-01-10T09:00:00Z'),
     };
 
-    // Seed Student 1
+    // Seed Enrolled Children (Students) - Belonging to Eleanor Mercer (Parent)
     const student1Id = 'student-uuid-201';
     const student1 = {
       id: student1Id,
@@ -52,23 +52,45 @@ class MemoryDB {
       email: 'student@portal.edu',
       password: defaultPasswordHash,
       role: 'STUDENT',
+      admissionNumber: 'GIS/2024/0142',
+      tokenNumber: 'TK-7841-92',
+      grade: 'Primary 4 Gold (Basic 4)',
+      parentId: 'parent-uuid-701',
       createdAt: new Date('2026-01-12T10:00:00Z'),
       updatedAt: new Date('2026-01-12T10:00:00Z'),
     };
 
-    // Seed Student 2
     const student2Id = 'student-uuid-202';
     const student2 = {
       id: student2Id,
-      name: 'Elena Vance',
+      name: 'Elena Mercer',
       email: 'elena@portal.edu',
       password: defaultPasswordHash,
       role: 'STUDENT',
+      admissionNumber: 'GIS/2025/0289',
+      tokenNumber: 'TK-5129-34',
+      grade: 'Primary 2 Diamond (Basic 2)',
+      parentId: 'parent-uuid-701',
       createdAt: new Date('2026-01-15T11:00:00Z'),
       updatedAt: new Date('2026-01-15T11:00:00Z'),
     };
 
-    // Seed Parent (Parent of Alex Mercer)
+    const student3Id = 'student-uuid-203';
+    const student3 = {
+      id: student3Id,
+      name: 'Lucas Mercer',
+      email: 'lucas@portal.edu',
+      password: defaultPasswordHash,
+      role: 'STUDENT',
+      admissionNumber: 'GIS/2026/0405',
+      tokenNumber: 'TK-9382-77',
+      grade: 'Nursery 2 Sunshine (Early Years)',
+      parentId: 'parent-uuid-701',
+      createdAt: new Date('2026-01-16T09:00:00Z'),
+      updatedAt: new Date('2026-01-16T09:00:00Z'),
+    };
+
+    // Seed Parent (Parent of 3 children: Alex, Elena, and Lucas)
     const parentId = 'parent-uuid-701';
     const parent = {
       id: parentId,
@@ -77,6 +99,7 @@ class MemoryDB {
       password: defaultPasswordHash,
       role: 'PARENT',
       childId: student1Id,
+      childrenIds: [student1Id, student2Id, student3Id],
       childName: 'Alex Mercer',
       createdAt: new Date('2026-01-14T09:00:00Z'),
       updatedAt: new Date('2026-01-14T09:00:00Z'),
@@ -94,7 +117,7 @@ class MemoryDB {
       updatedAt: new Date('2026-01-01T08:00:00Z'),
     };
 
-    this.users.push(admin, teacher, student1, student2, parent);
+    this.users.push(admin, teacher, student1, student2, student3, parent);
 
     // Seed Primary School Classes
     const classId = 'class-uuid-301';
@@ -289,6 +312,42 @@ class MemoryDB {
         paymentMethod: null,
         transactionRef: null,
         payerName: null,
+      },
+      {
+        id: 'bill-106',
+        invoiceNumber: 'GIS-INV-2026-006',
+        studentId: student2Id,
+        studentName: 'Elena Mercer',
+        grade: 'Primary 2 Diamond (Basic 2)',
+        title: 'Term 1 Primary Tuition & Learning Materials',
+        description: 'Covers core academic instruction, reading resources, and curriculum access for Primary 2.',
+        category: 'Tuition',
+        term: 'Term 1 (2025/2026)',
+        amount: 1150.00,
+        dueDate: new Date('2026-02-15T23:59:59Z'),
+        status: 'PAID',
+        paidAt: new Date('2026-02-11T10:15:00Z'),
+        paymentMethod: 'Bank Transfer (First Bank)',
+        transactionRef: 'TXN-71829031',
+        payerName: 'Eleanor Mercer',
+      },
+      {
+        id: 'bill-107',
+        invoiceNumber: 'GIS-INV-2026-007',
+        studentId: student3Id,
+        studentName: 'Lucas Mercer',
+        grade: 'Nursery 2 Sunshine (Early Years)',
+        title: 'Term 1 Nursery 2 Tuition & Montessori Play Pack',
+        description: 'Early childhood foundation learning, sensory activity equipment, and phonics workbooks.',
+        category: 'Tuition',
+        term: 'Term 1 (2025/2026)',
+        amount: 950.00,
+        dueDate: new Date('2026-02-15T23:59:59Z'),
+        status: 'PAID',
+        paidAt: new Date('2026-02-12T16:20:00Z'),
+        paymentMethod: 'Bank Transfer (First Bank)',
+        transactionRef: 'TXN-49201844',
+        payerName: 'Eleanor Mercer',
       }
     );
 
@@ -376,13 +435,15 @@ class MemoryDB {
       { id: 'tt-34', day: 'Friday', period: 6, time: '13:45 - 15:00', subject: 'Inter-House Sports Competitions & Relays', code: 'HOUSE', room: 'Sports Arena', teacher: 'Coach T. Adeleke', color: 'orange' },
     ];
 
-    // Seed Official Terminal Report Card (Primary School)
+    // Seed Official Terminal Report Cards (Primary School & Early Years)
     this.reportCards = [
+      // 1. Alex Mercer (Primary 4 Gold)
       {
         id: 'report-101',
         studentId: student1Id,
         studentName: 'Alex Mercer',
-        admissionNumber: 'GIPS/2024/0142',
+        admissionNumber: 'GIS/2024/0142',
+        tokenNumber: 'TK-7841-92',
         classGrade: 'Primary 4 Gold (Basic 4)',
         academicYear: '2025/2026',
         term: 'Term 1',
@@ -524,6 +585,172 @@ class MemoryDB {
         formTeacherRemark: 'Alex has shown remarkable diligence, exemplary manners, and brilliant academic curiosity throughout this term. He is a shining star in Primary 4 Gold!',
         formTeacherName: 'Mrs. Sarah Connor (Primary 4 Class Teacher)',
         principalRemark: 'A delightful and well-deserved academic achievement. Alex embodies the wholesome character and joyful brilliance of Golden International School, Ido-Ekiti.',
+        principalName: 'Pastor Ogunleye S.A',
+        principalTitle: 'Founder & Administrative Head',
+      },
+
+      // 2. Elena Mercer (Primary 2 Diamond)
+      {
+        id: 'report-102',
+        studentId: student2Id,
+        studentName: 'Elena Mercer',
+        admissionNumber: 'GIS/2025/0289',
+        tokenNumber: 'TK-5129-34',
+        classGrade: 'Primary 2 Diamond (Basic 2)',
+        academicYear: '2025/2026',
+        term: 'Term 1',
+        termTitle: 'First Term (2025/2026 Academic Session)',
+        schoolOpenedDays: 65,
+        daysPresent: 65,
+        daysAbsent: 0,
+        daysPunctual: 64,
+        positionInClass: '1st out of 24',
+        overallTotal: 734,
+        overallMax: 800,
+        overallPercentage: 91.8,
+        overallGrade: 'A+',
+        gpa: '3.88 / 4.00',
+        decision: 'PROMOTED TO PRIMARY 3 DIAMOND WITH HONORS',
+        nextTermBegins: '14th September 2026',
+        issuedDate: '2026-03-28',
+        subjects: [
+          {
+            subjectName: 'Primary Mathematics & Quantitative Reasoning',
+            ca1: 19, ca2: 18, exam: 57, total: 94, grade: 'A+', classAverage: 74.2, classHighest: 96, classLowest: 50, position: '1st',
+            teacherRemark: 'Exceptional mastery of basic operations, number patterns, and mental drills.'
+          },
+          {
+            subjectName: 'English Reading, Jolly Phonics & Diction',
+            ca1: 20, ca2: 19, exam: 56, total: 95, grade: 'A+', classAverage: 75.8, classHighest: 97, classLowest: 55, position: '1st',
+            teacherRemark: 'Clear pronunciation, fluent oral reading, and lovely spelling competence.'
+          },
+          {
+            subjectName: 'Basic Science & Nature Discoveries',
+            ca1: 18, ca2: 18, exam: 52, total: 88, grade: 'A', classAverage: 69.4, classHighest: 92, classLowest: 48, position: '2nd',
+            teacherRemark: 'Displays eager interest in animals, living systems, and natural elements.'
+          },
+          {
+            subjectName: 'Social Studies & Civic Norms',
+            ca1: 19, ca2: 18, exam: 54, total: 91, grade: 'A+', classAverage: 71.0, classHighest: 94, classLowest: 45, position: '1st',
+            teacherRemark: 'Shows commendable understanding of respect for elders and civic duties.'
+          },
+          {
+            subjectName: 'Computer Studies & Junior Tech',
+            ca1: 18, ca2: 17, exam: 55, total: 90, grade: 'A+', classAverage: 68.5, classHighest: 93, classLowest: 42, position: '2nd',
+            teacherRemark: 'Quick learner with computer mouse navigation and kid-friendly paint programs.'
+          },
+          {
+            subjectName: 'Creative Arts, Colouring & Handcraft',
+            ca1: 19, ca2: 19, exam: 55, total: 93, grade: 'A+', classAverage: 79.1, classHighest: 95, classLowest: 60, position: '2nd',
+            teacherRemark: 'Neat colour mixing, imaginative drawings, and tidy workbook presentation.'
+          },
+          {
+            subjectName: 'Physical & Health Education',
+            ca1: 18, ca2: 19, exam: 55, total: 92, grade: 'A+', classAverage: 77.0, classHighest: 94, classLowest: 58, position: '1st',
+            teacherRemark: 'Agile, playful, and practices excellent personal cleanliness habits.'
+          },
+          {
+            subjectName: 'French for Juniors',
+            ca1: 18, ca2: 18, exam: 55, total: 91, grade: 'A+', classAverage: 70.3, classHighest: 93, classLowest: 50, position: '2nd',
+            teacherRemark: 'Confidently sings French rhymes and recalls greetings with delightful accent.'
+          }
+        ],
+        affectiveTraits: [
+          { trait: 'Attentiveness in Circle Time', score: 5 },
+          { trait: 'Neatness of Uniform & Workbooks', score: 5 },
+          { trait: 'Politeness & Respect for Teachers', score: 5 },
+          { trait: 'Kindness & Sharing with Classmates', score: 5 },
+          { trait: 'Honesty & Good Manners', score: 5 },
+          { trait: 'Eagerness & Curiosity in Class', score: 5 },
+        ],
+        psychomotorTraits: [
+          { trait: 'Handwriting & Cursive Penmanship', score: 5 },
+          { trait: 'Pencil Grip & Drawing Precision', score: 5 },
+          { trait: 'Sports, Tag & Playground Agility', score: 5 },
+          { trait: 'Singing, Rhythm & Music Expression', score: 5 },
+          { trait: 'Computer Keyboard & Mouse Handling', score: 4 },
+        ],
+        formTeacherRemark: 'Elena is a brilliant, polite, and diligent young pupil. She took 1st position in Primary 2 Diamond with sheer dedication. Splendid performance!',
+        formTeacherName: 'Mrs. F. Alabi (Primary 2 Class Teacher)',
+        principalRemark: 'Exemplary achievement! Elena shows immense promise and high Christian moral values.',
+        principalName: 'Pastor Ogunleye S.A',
+        principalTitle: 'Founder & Administrative Head',
+      },
+
+      // 3. Lucas Mercer (Nursery 2 Sunshine)
+      {
+        id: 'report-103',
+        studentId: student3Id,
+        studentName: 'Lucas Mercer',
+        admissionNumber: 'GIS/2026/0405',
+        tokenNumber: 'TK-9382-77',
+        classGrade: 'Nursery 2 Sunshine (Early Years)',
+        academicYear: '2025/2026',
+        term: 'Term 1',
+        termTitle: 'First Term (2025/2026 Academic Session)',
+        schoolOpenedDays: 65,
+        daysPresent: 63,
+        daysAbsent: 2,
+        daysPunctual: 62,
+        positionInClass: '1st out of 18',
+        overallTotal: 570,
+        overallMax: 600,
+        overallPercentage: 95.0,
+        overallGrade: 'A+',
+        gpa: '4.00 / 4.00',
+        decision: 'EXCELLENT FOUNDATIONAL MASTERY — ADVANCING TO PRIMARY 1',
+        nextTermBegins: '14th September 2026',
+        issuedDate: '2026-03-28',
+        subjects: [
+          {
+            subjectName: 'Jolly Phonics & Letter Sounds (A-Z)',
+            ca1: 20, ca2: 19, exam: 57, total: 96, grade: 'A+', classAverage: 79.2, classHighest: 98, classLowest: 60, position: '1st',
+            teacherRemark: 'Recognizes all phonogram sounds and blends 3-letter words accurately.'
+          },
+          {
+            subjectName: 'Numbers, Counting & Shape Identification',
+            ca1: 20, ca2: 20, exam: 58, total: 98, grade: 'A+', classAverage: 82.5, classHighest: 99, classLowest: 62, position: '1st',
+            teacherRemark: 'Counted up to 100 effortlessly; identifies circles, triangles, and cubes.'
+          },
+          {
+            subjectName: 'Social Habits, Courtesy & Moral Values',
+            ca1: 19, ca2: 19, exam: 57, total: 95, grade: 'A+', classAverage: 80.0, classHighest: 96, classLowest: 65, position: '1st',
+            teacherRemark: 'Very helpful, shares toys readily with peers, and says Please and Thank you.'
+          },
+          {
+            subjectName: 'Health Habits & Personal Hygiene',
+            ca1: 19, ca2: 18, exam: 57, total: 94, grade: 'A+', classAverage: 78.4, classHighest: 95, classLowest: 58, position: '2nd',
+            teacherRemark: 'Washes hands diligently before meals and keeps cubby area orderly.'
+          },
+          {
+            subjectName: 'Creative Colouring, Rhymes & Music',
+            ca1: 20, ca2: 20, exam: 56, total: 96, grade: 'A+', classAverage: 83.0, classHighest: 97, classLowest: 64, position: '1st',
+            teacherRemark: 'Superb rhythm, sings scripture nursery rhymes with delight and confidence.'
+          },
+          {
+            subjectName: 'Science Discovery & Nature Walk',
+            ca1: 18, ca2: 18, exam: 55, total: 91, grade: 'A+', classAverage: 74.0, classHighest: 93, classLowest: 52, position: '2nd',
+            teacherRemark: 'Loves observing insects, garden flowers, and exploring texture blocks.'
+          }
+        ],
+        affectiveTraits: [
+          { trait: 'Attentiveness in Circle Time', score: 5 },
+          { trait: 'Neatness of Uniform & Workbooks', score: 5 },
+          { trait: 'Politeness & Respect for Teachers', score: 5 },
+          { trait: 'Kindness & Sharing with Classmates', score: 5 },
+          { trait: 'Honesty & Good Manners', score: 5 },
+          { trait: 'Eagerness & Curiosity in Class', score: 5 },
+        ],
+        psychomotorTraits: [
+          { trait: 'Handwriting & Cursive Penmanship', score: 5 },
+          { trait: 'Pencil Grip & Drawing Precision', score: 5 },
+          { trait: 'Sports, Tag & Playground Agility', score: 5 },
+          { trait: 'Singing, Rhythm & Music Expression', score: 5 },
+          { trait: 'Computer Keyboard & Mouse Handling', score: 4 },
+        ],
+        formTeacherRemark: 'Lucas has made stunning strides this term! He is confident, joyful, and an extraordinary reader in Nursery 2. Highly recommended for Primary 1.',
+        formTeacherName: 'Mrs. B. Cole (Nursery 2 Lead Teacher)',
+        principalRemark: 'Delightful foundational brilliance. Lucas is an absolute treasure and embodies excellence.',
         principalName: 'Pastor Ogunleye S.A',
         principalTitle: 'Founder & Administrative Head',
       }
@@ -1000,6 +1227,13 @@ class MemoryDB {
         if (args.where?.role) {
           list = list.filter(u => u.role === args.where.role);
         }
+        if (args.where?.id) {
+          if (args.where.id.in && Array.isArray(args.where.id.in)) {
+            list = list.filter(u => args.where.id.in.includes(u.id));
+          } else if (typeof args.where.id === 'string') {
+            list = list.filter(u => u.id === args.where.id);
+          }
+        }
         return list;
       },
       create: async ({ data }) => {
@@ -1433,12 +1667,18 @@ class MemoryDB {
         return this.reportCards.find(r => {
           if (where?.studentId && r.studentId !== where.studentId) return false;
           if (where?.term && r.term !== where.term) return false;
+          if (where?.admissionNumber && r.admissionNumber?.toLowerCase() !== where.admissionNumber?.toLowerCase()) return false;
+          if (where?.tokenNumber && r.tokenNumber?.toLowerCase() !== where.tokenNumber?.toLowerCase()) return false;
           return true;
         }) || null;
       },
       findMany: async ({ where } = {}) => {
         let list = [...this.reportCards];
-        if (where?.studentId) list = list.filter(r => r.studentId === where.studentId);
+        if (where?.studentId?.in) {
+          list = list.filter(r => where.studentId.in.includes(r.studentId));
+        } else if (where?.studentId) {
+          list = list.filter(r => r.studentId === where.studentId);
+        }
         if (where?.term) list = list.filter(r => r.term === where.term);
         return list;
       },
@@ -1698,8 +1938,7 @@ const initDatabase = async () => {
       console.log('ℹ️  PostgreSQL is not reachable on localhost:5432. Running in memory dev mode with pre-seeded demo accounts.');
       console.log('   Admin demo:   admin@portal.edu   | password: password123');
       console.log('   Teacher demo: teacher@portal.edu | password: password123');
-      console.log('   Student demo: student@portal.edu | password: password123');
-      console.log('   Parent demo:  parent@portal.edu  | password: password123');
+      console.log('   Parent demo:  parent@portal.edu  | password: password123 (Has 3 Wards: Alex, Elena, Lucas)');
     }
   } else {
     isPostgresAvailable = false;

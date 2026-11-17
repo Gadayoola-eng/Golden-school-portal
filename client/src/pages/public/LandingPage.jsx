@@ -252,6 +252,114 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* QUICK PORTAL ACCESS BANNER */}
+      <section className="bg-slate-900 py-10 px-4 sm:px-6 lg:px-8 text-white border-y border-slate-800">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+            <div>
+              <span className="text-amber-400 text-xs font-black uppercase tracking-wider block">
+                Direct School Portals
+              </span>
+              <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight">
+                Quick Access for Parents & Staff
+              </h2>
+            </div>
+            <p className="text-xs text-slate-400 max-w-md">
+              Check your children's terminal results with scratch-card token numbers or manage primary classes directly.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {/* Parent Portal Card */}
+            <div className="bg-slate-800/80 border-2 border-amber-500/50 hover:border-amber-400 rounded-2xl p-5 flex flex-col justify-between transition-all group shadow-lg">
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <span className="p-2.5 rounded-xl bg-amber-500 text-slate-950 font-bold inline-block">
+                    <Users className="w-5 h-5" />
+                  </span>
+                  <span className="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                    Result Token PIN Enabled
+                  </span>
+                </div>
+                <h3 className="text-base font-extrabold text-white group-hover:text-amber-400 transition-colors">
+                  Parent Portal & Result Checker
+                </h3>
+                <p className="text-xs text-slate-300 mt-2 leading-relaxed">
+                  View terminal report cards with unique token numbers, see all your children's reports all at once on one page, track attendance, and settle tuition fees online.
+                </p>
+              </div>
+              <div className="pt-4 mt-4 border-t border-slate-700/60">
+                <Link
+                  to="/login/parent"
+                  className="w-full py-2.5 px-4 rounded-xl text-xs font-black bg-amber-500 hover:bg-amber-400 text-slate-950 flex items-center justify-center gap-2 transition-all shadow-md"
+                >
+                  <span>Enter Parent Portal</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            </div>
+
+            {/* Teacher / Staff Portal Card */}
+            <div className="bg-slate-800/80 border border-slate-700 hover:border-indigo-400/50 rounded-2xl p-5 flex flex-col justify-between transition-all group shadow-lg">
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <span className="p-2.5 rounded-xl bg-indigo-600 text-white font-bold inline-block">
+                    <GraduationCap className="w-5 h-5" />
+                  </span>
+                  <span className="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                    Staff Intranet
+                  </span>
+                </div>
+                <h3 className="text-base font-extrabold text-white group-hover:text-indigo-300 transition-colors">
+                  Teacher & Staff Portal
+                </h3>
+                <p className="text-xs text-slate-300 mt-2 leading-relaxed">
+                  Enter continuous assessment scores (CA1 & CA2), examination totals, affective/psychomotor trait scores, and sign off on terminal report comments.
+                </p>
+              </div>
+              <div className="pt-4 mt-4 border-t border-slate-700/60">
+                <Link
+                  to="/login/teacher"
+                  className="w-full py-2.5 px-4 rounded-xl text-xs font-bold bg-slate-700 hover:bg-slate-600 text-white flex items-center justify-center gap-2 transition-all"
+                >
+                  <span>Staff Sign In</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            </div>
+
+            {/* Admissions Online */}
+            <div className="bg-slate-800/80 border border-slate-700 hover:border-slate-500 rounded-2xl p-5 flex flex-col justify-between transition-all group shadow-lg">
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <span className="p-2.5 rounded-xl bg-emerald-600 text-white font-bold inline-block">
+                    <Sparkles className="w-5 h-5" />
+                  </span>
+                  <span className="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                    2026/2027 Session
+                  </span>
+                </div>
+                <h3 className="text-base font-extrabold text-white group-hover:text-emerald-300 transition-colors">
+                  Admissions Application
+                </h3>
+                <p className="text-xs text-slate-300 mt-2 leading-relaxed">
+                  Enroll your child into Crèche, Nursery, or Primary Basic 1 to 6. Instant online application form, document upload, and assessment scheduling.
+                </p>
+              </div>
+              <div className="pt-4 mt-4 border-t border-slate-700/60">
+                <Link
+                  to="/apply"
+                  className="w-full py-2.5 px-4 rounded-xl text-xs font-bold bg-slate-700 hover:bg-slate-600 text-white flex items-center justify-center gap-2 transition-all"
+                >
+                  <span>Apply for Admission</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ========================================================== */}
       {/* 3. EDUCATIONAL LEVELS OVERVIEW */}
       {/* ========================================================== */}

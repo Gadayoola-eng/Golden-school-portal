@@ -9,6 +9,9 @@ import ProtectedRoute from './components/ProtectedRoute';
 
 // Auth Pages
 import Login from './pages/auth/Login';
+import ParentLogin from './pages/auth/ParentLogin';
+import TeacherLogin from './pages/auth/TeacherLogin';
+import AdminLogin from './pages/auth/AdminLogin';
 import Signup from './pages/auth/Signup';
 
 // Teacher Pages
@@ -72,7 +75,7 @@ function RootRedirect() {
   if (user.role === 'ADMIN') return <Navigate to="/admin" replace />;
   if (user.role === 'TEACHER') return <Navigate to="/teacher" replace />;
   if (user.role === 'PARENT') return <Navigate to="/parent" replace />;
-  return <Navigate to="/student" replace />;
+  return <Navigate to="/login/parent" replace />;
 }
 
 export default function App() {
@@ -81,8 +84,14 @@ export default function App() {
       <ToastProvider>
         <BrowserRouter>
           <Routes>
-          {/* Public Auth Routes */}
+          {/* Public Auth Routes - Dedicated Login Portals */}
           <Route path="/login" element={<Login />} />
+          <Route path="/login/parent" element={<ParentLogin />} />
+          <Route path="/parent/login" element={<ParentLogin />} />
+          <Route path="/login/teacher" element={<TeacherLogin />} />
+          <Route path="/teacher/login" element={<TeacherLogin />} />
+          <Route path="/login/admin" element={<AdminLogin />} />
+          <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/signup" element={<Signup />} />
 
           {/* Public Website & Knowledge Base Routes (Phase 3) */}
@@ -169,55 +178,9 @@ export default function App() {
               }
             />
 
-            {/* Student Protected Routes (Admin also has full access) */}
-            <Route
-              path="/student"
-              element={
-                <ProtectedRoute allowedRoles={['STUDENT', 'ADMIN']}>
-                  <StudentDashboard />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/student/classes"
-              element={
-                <ProtectedRoute allowedRoles={['STUDENT', 'ADMIN']}>
-                  <StudentClasses />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/student/browse"
-              element={
-                <ProtectedRoute allowedRoles={['STUDENT', 'ADMIN']}>
-                  <StudentClasses defaultBrowse={true} />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/student/classes/:classId"
-              element={
-                <ProtectedRoute allowedRoles={['STUDENT', 'ADMIN']}>
-                  <StudentClasses />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/student/classes/:classId/grades"
-              element={
-                <ProtectedRoute allowedRoles={['STUDENT', 'ADMIN']}>
-                  <StudentGrades />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/student/assignments/:id"
-              element={
-                <ProtectedRoute allowedRoles={['STUDENT', 'ADMIN', 'TEACHER']}>
-                  <StudentAssignment />
-                </ProtectedRoute>
-              }
-            />
+            {/* Pupil portal routes redirected to Parent Portal */}
+            <Route path="/student" element={<Navigate to="/parent" replace />} />
+            <Route path="/student/*" element={<Navigate to="/parent" replace />} />
 
             {/* Parent Portal Protected Routes (Admin also has access) */}
             <Route
